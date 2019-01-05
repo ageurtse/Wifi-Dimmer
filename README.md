@@ -1,5 +1,7 @@
-# Wifi-Dimmer
+# Wifi Dimmer
 This is all about my home build WiFi Dimmer
+
+![3d view 1](https://user-images.githubusercontent.com/2020670/50725586-ef5c0180-10ff-11e9-834a-b4fb0577eff1.jpg)
 
 This is version 2, in the past i build a differt version which is not exactly what i want. 
 Version 2 is one which fit in a simpel housing. 
