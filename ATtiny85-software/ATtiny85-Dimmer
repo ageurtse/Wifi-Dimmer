@@ -28,19 +28,19 @@
 
 
 #define DETECT PB2      //zero cross detect, interrupt 0
-#define GATE PB3        //triac gate is physical 
-#define PULSE 4       	//trigger pulse width 4 
+#define GATE PB3        //triac gate is physical
+#define PULSE 4       	//trigger pulse width 4
 
 #define RX    PB1   		//Serial port RX
 #define TX    PB0   		//Serial port TX
 SoftwareSerial Serial(RX, TX);
 
-int dimvalue;
+int dimvalue = 100;			//After startup, turn off light;
 
 void setup(){
 
   delay (9000);								//Wait for booting the ESP8266
-  
+
 	// set up pins
   pinMode(DETECT, INPUT);      //zero cross detect
   digitalWrite(DETECT, HIGH);  //enable pull-up resistor
@@ -56,12 +56,14 @@ void setup(){
   delay(500);
   digitalWrite(GATE, LOW);
   delay(500);
+  digitalWrite(GATE, HIGH);
+
 
   // set up Timer1
-  TCCR1 = 0;     //stop timer
-  OCR1A = 24;    //initialize the comparator
-  TIMSK = _BV(OCIE1A) | _BV(TOIE1);  //interrupt on Compare Match A | enable timer overflow interrupt
-  sei();  // enable interrupts
+  TCCR1 = 0;     											// stop timer
+  OCR1A = dimvalue;										// set initial dim value
+  TIMSK = _BV(OCIE1A) | _BV(TOIE1);  	// interrupt on Compare Match A | enable timer overflow interrupt
+  sei();  														// enable interrupts
   // set up zero crossing interrupt
   attachInterrupt(0,zeroCrossingInterrupt, FALLING);   //
 
@@ -93,7 +95,7 @@ ISR(TIMER1_OVF_vect){ 			//timer1 overflow
   TCCR1 = 0;                //disable timer stop unintended triggers
 }
 
-void loop(){     						
+void loop(){
   if (Serial.available()) {
     // read the most recent byte (which will be from 0 to 100, so it's in %):
   	dimvalue = Serial.read();
