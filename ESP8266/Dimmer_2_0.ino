@@ -24,21 +24,21 @@ ESP8266HTTPUpdateServer UpdateServer;
 
 #define MinDim                6
 #define MaxDim                61
-#define LowestDim							0
-#define HighestDim						100
 #define RX										14
 #define TX										12
+#define led_pin 		2
+#define relay_pin		16
 
 SoftwareSerial DimSerial(RX,TX,false,256); // RX, TX
-
 
 //MQTT stuff
 const char* password 		= "";
 const char* mqtt_server = "192.168.1.100";
 String hostname					= "arnold";
 
-int led_pin 					= 2;
-int relay_pin					= 16;
+
+int OldValue;
+int DimValue;
 
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
@@ -48,7 +48,7 @@ int value = 0;
 
 
 void callback(char* topic, byte* payload, unsigned int length) {
-  int DimValue;
+
   String sendstr;
 
 	Serial.print("Message arrived [");
@@ -60,13 +60,26 @@ void callback(char* topic, byte* payload, unsigned int length) {
 	String s = String((char*)payload);
   DimValue = String((char*)payload).toInt();
 
-
   if (String(topic) == "/arnold/dim/") {
-  		Serial.println("Dim recieved");
-      DimValue = map(DimValue,0,100,MaxDim,MinDim);
-      mqttClient.publish(("/"+hostname+"/statusDim").c_str(), String(DimValue,DEC).c_str());
-      DimSerial.write(DimValue);
+  	Serial.println("Dim recieved");
+    DimValue = map(DimValue,0,100,MaxDim,MinDim);
+
+  	if (DimValue == MaxDim ){
+  		    			digitalWrite(led_pin, HIGH);
+  		    			digitalWrite(relay_pin, LOW);
+  		    		} else {
+  		    			digitalWrite(led_pin, LOW);
+  		    			digitalWrite(relay_pin, HIGH);
+  		}
+
+
+    DimSerial.write(DimValue);
+		mqttClient.publish(("/"+hostname+"/statusDim").c_str(), String(DimValue,DEC).c_str());
+
+
   }
+
+
   if (String(topic) == "/arnold/switch/") {
     		Serial.println("Switch recieved");
     		if (DimValue == 0){
