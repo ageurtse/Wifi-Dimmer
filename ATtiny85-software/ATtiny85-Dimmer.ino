@@ -35,7 +35,7 @@
 #define TX    PB0   		//Serial port TX
 SoftwareSerial Serial(RX, TX);
 
-int dimvalue = 100;			//After startup, turn off light;
+int dimvalue;			//After startup, turn off light;
 
 void setup(){
 
@@ -78,7 +78,7 @@ void setup(){
 //Interrupt Service Routines
 void zeroCrossingInterrupt(){
   TCNT1 = 0;   							//reset timer - count from zero
-  TCCR1 = B00000110;        // 1000 for 64 see table 12.5 of the tiny85 datasheet
+  TCCR1 = B00001000;        // 1000 ajg 0110 for 64 see table 12.5 of the tiny85 datasheet
 }
 
 ISR(TIMER1_COMPA_vect){    //comparator match
