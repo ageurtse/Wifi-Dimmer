@@ -17,3 +17,4 @@ The code is based on the forum post at arduino : https://forum.arduino.cc/index.
 For the main board there is a small mistake made with the Triac, there where 2 wires changes. A1 and A2 need to be turned. 
 In a next updat of the print i will fix that, for now i just solderd 2 wires and cross connect them to te pcb.
 
+Also the Fuse holder is to large, i bought a pcb fuse now it all fits well.
