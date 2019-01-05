@@ -22,8 +22,10 @@ AutoConnect      				Portal(Server);
 AutoConnectConfig 			config;
 ESP8266HTTPUpdateServer UpdateServer;
 
-#define MinDim                15
-#define MaxDim                250
+#define MinDim                6
+#define MaxDim                61
+#define LowestDim							0
+#define HighestDim						100
 #define RX										14
 #define TX										12
 
@@ -57,14 +59,12 @@ void callback(char* topic, byte* payload, unsigned int length) {
 	payload[length] = '\0';
 	String s = String((char*)payload);
   DimValue = String((char*)payload).toInt();
-  DimValue = DimValue *2.55;
-  //Serial.println(DimValue);
+
 
   if (String(topic) == "/arnold/dim/") {
   		Serial.println("Dim recieved");
-      if (DimValue<MinDim) { DimValue = 0; };
-      if (DimValue>MaxDim) { DimValue = 100; };
-      DimValue = map(DimValue, 0, 255, 255, 0);
+      DimValue = map(DimValue,0,100,MaxDim,MinDim);
+      mqttClient.publish(("/"+hostname+"/statusDim").c_str(), String(DimValue,DEC).c_str());
       DimSerial.write(DimValue);
   }
   if (String(topic) == "/arnold/switch/") {
@@ -196,11 +196,6 @@ void setup() {
 void loop() {
   Portal.handleClient();
 	ArduinoOTA.handle();
-	//if (DimSerial.available()) {
-		//String instelwaarde = DimSerial.readstring();
-//		mqttClient.publish(("/"+hostname+"/status").c_str(), DimSerial.readString().c_str());
-//	}
-
 	if (!mqttClient.connected()) {
     reconnect();
   }
