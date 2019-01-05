@@ -1,5 +1,8 @@
 # Wifi Dimmer
 This is all about my home build WiFi Dimmer
+Becaus of it's my first github project, the master is still in Beta. 
+For me the project works, but there are a lot off things to change, so keep watching for any change.
+
 
 ![3d view 1](https://user-images.githubusercontent.com/2020670/50725586-ef5c0180-10ff-11e9-834a-b4fb0577eff1.jpg)
 
