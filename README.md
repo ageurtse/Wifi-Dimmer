@@ -13,3 +13,7 @@ Both are posted here.
 The ATtiny85 software is for the soul purpose of dimming the light, there is a zerocross detction which is on interupt 0, the gate is on pin PB3. 
 The communication with the main processor is done by softserial. 
 The code is based on the forum post at arduino : https://forum.arduino.cc/index.php?topic=314773.0
+
+For the main board there is a small mistake made with the Triac, there where 2 wires changes. A1 and A2 need to be turned. 
+In a next updat of the print i will fix that, for now i just solderd 2 wires and cross connect them to te pcb.
+
