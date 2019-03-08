@@ -1,5 +1,8 @@
 # Wifi Dimmer
 This is all about my home build WiFi Dimmer
+Becaus of it's my first github project, the master is still in Beta. 
+For me the project works, but there are a lot off things to change, so keep watching for any change.
+
 
 ![3d view 1](https://user-images.githubusercontent.com/2020670/50725586-ef5c0180-10ff-11e9-834a-b4fb0577eff1.jpg)
 
@@ -15,7 +18,7 @@ The communication with the main processor is done by softserial.
 The code is based on the forum post at arduino : https://forum.arduino.cc/index.php?topic=314773.0
 
 # ESP8266 software
-The main software for the ESP12 module is build with Sloeber an arduino like enviroment. i think the file will also load in arduino, did not try that. 
+The main software for the ESP12 module is build with arduino, the wifi and custom settings can be done with the great library from Hieromon https://github.com/Hieromon/AutoConnect
 After fist flash by serial, all next updates could be down by browser. 
 find the IP-adres or host name and add /update to get to the update page. 
 To alter wifi setting's and in the futher mqtt settings and i hope a lot more add /_ac
@@ -23,7 +26,7 @@ To alter wifi setting's and in the futher mqtt settings and i hope a lot more ad
 The file makes use of some thirth party library's which can be found here :
 AutoConnect : https://github.com/Hieromon/AutoConnect
 PageBuilder : https://github.com/Hieromon/PageBuilder
-
+ArduinoJson : https://arduinojson.org/ version 5
 
 
 # The hardware
