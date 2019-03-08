@@ -35,7 +35,8 @@
 #define TX    PB0   		//Serial port TX
 SoftwareSerial Serial(RX, TX);
 
-int dimvalue;			//After startup, turn off light;
+int RecivedValue;			//After startup, turn off light;
+int TCCR1Value = B00001000;
 
 void setup(){
 
@@ -61,7 +62,7 @@ void setup(){
 
   // set up Timer1
   TCCR1 = 0;     											// stop timer
-  OCR1A = dimvalue;										// set initial dim value
+  OCR1A = RecivedValue;										// set initial dim value
   TIMSK = _BV(OCIE1A) | _BV(TOIE1);  	// interrupt on Compare Match A | enable timer overflow interrupt
   sei();  														// enable interrupts
   // set up zero crossing interrupt
@@ -78,7 +79,7 @@ void setup(){
 //Interrupt Service Routines
 void zeroCrossingInterrupt(){
   TCNT1 = 0;   							//reset timer - count from zero
-  TCCR1 = B00001000;        // 1000 ajg 0110 for 64 see table 12.5 of the tiny85 datasheet
+  TCCR1 = TCCR1Value;        // 1000 ajg 0110 for 64 see table 12.5 of the tiny85 datasheet
 }
 
 ISR(TIMER1_COMPA_vect){    //comparator match
@@ -98,7 +99,7 @@ ISR(TIMER1_OVF_vect){ 			//timer1 overflow
 void loop(){
   if (Serial.available()) {
     // read the most recent byte (which will be from 0 to 100, so it's in %):
-  	dimvalue = Serial.read();
-  	OCR1A = dimvalue;
+  	RecivedValue = Serial.read();
+  	OCR1A = RecivedValue;
   }
 }
