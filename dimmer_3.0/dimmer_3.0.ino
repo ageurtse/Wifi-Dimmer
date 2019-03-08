@@ -30,25 +30,25 @@ void setup() {
   }
   if (loadConfiguration("/config.json", dimconfig)) {
     Serial.println("Config read");
-  } else {
-    Serial.println("Failed to read config");
   }
   // Dump config file
   Serial.println(F("Print config file after reading..."));
   printFile(fileName);
 
-  // Create configuration file
-  Serial.println(F("Saving configuration after writing..."));
-  saveConfiguration(fileName, dimconfig);
-
-  // Dump config file
-  Serial.println(F("Print config file..."));
-  printFile(fileName);
-
   config.apid = String("ESP") + "-" + String(GET_CHIPID(), HEX);
+
+  if (dimconfig.devicename != "") {
+    config.apid = dimconfig.devicename;
+    config.hostName = dimconfig.devicename;
+    Serial.println(F("Set custom name"));
+  }
+
+  Serial.print("APID : ");
+  Serial.println(config.apid);
+  
   config.bootUri = AC_ONBOOTURI_HOME;
   config.homeUri = "/";
- 
+  
   webServer.on("/saveDim", saveSetting);  // Register /feels handler
   webServer.on("/", handleRoot);
   
