@@ -27,9 +27,13 @@ bool loadConfiguration(const char *filename, DimConfig &loadconfig) {
   loadconfig.minDimValue  = root["minDimValue"] | 15;  
   loadconfig.maxDimValue  = root["maxDimValue"] | 48 ;  
   loadconfig.dimCurve     = root["dimCurve"] | 6;  
-  loadconfig.prescaller   = root["prescaller"] | 0;  
+  loadconfig.dimPrescale  = root["dimPrescale"] | 0;  
 
-  loadconfig.mqtt  = (const char*)root["mqtt"];  
+  loadconfig.devicename   = (const char*)root["devicename"]; 
+  loadconfig.mqttServer   = (const char*)root["mqttServer"]; 
+  loadconfig.mqttUsername = (const char*)root["mqttUsername"]; 
+  loadconfig.mqttPassword = (const char*)root["mqttPassword"]; 
+
   // Close the file (File's destructor doesn't close the file)
   file.close();
 }
@@ -40,7 +44,6 @@ bool loadConfiguration(const char *filename, DimConfig &loadconfig) {
 bool saveConfiguration(const char *filename, const DimConfig &saveconfig) {
   // Delete existing file, otherwise the configuration is appended to the file
   
-
   SPIFFS.remove(fileName);
   
   // Open file for writing
@@ -63,9 +66,12 @@ bool saveConfiguration(const char *filename, const DimConfig &saveconfig) {
   root["minDimValue"]   = saveconfig.minDimValue;  
   root["maxDimValue"]   = saveconfig.maxDimValue;  
   root["dimCurve"]      = saveconfig.dimCurve;  
-  root["prescaller"]    = saveconfig.prescaller;  
+  root["dimPrescale"]    = saveconfig.dimPrescale;  
 
-  root["mqtt"]          = saveconfig.mqtt;  
+  root["devicename"]    = saveconfig.devicename;  
+  root["mqttServer"]    = saveconfig.mqttServer;  
+  root["mqttUsername"]  = saveconfig.mqttUsername;  
+  root["mqttPassword"]  = saveconfig.mqttPassword;  
   
   // Serialize JSON to file
   if (root.printTo(file) == 0) {

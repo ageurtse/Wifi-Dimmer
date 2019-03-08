@@ -12,10 +12,13 @@ struct DimConfig {
   byte minDimValue;           // min value 4
   byte maxDimValue;           // max value 64
   int  dimCurve;              // range goes -10 til 10
-  byte prescaller;            // default 8 B00001000
+  byte dimPrescale;           // default 8 B00001000
 
 //mqtt config parameters
-String mqtt;
+  String devicename;
+  String mqttServer;
+  String mqttUsername;
+  String mqttPassword;
 };
 
 const char *fileName = "/config.txt";  // <- SD library uses 8.3 filenames
