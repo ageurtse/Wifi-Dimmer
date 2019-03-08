@@ -32,13 +32,6 @@ bool loadConfiguration(const char *filename, DimConfig &loadconfig) {
   loadconfig.mqtt  = (const char*)root["mqtt"];  
   // Close the file (File's destructor doesn't close the file)
   file.close();
-
-/*default values
-minDimValue = 15
-maxDimValue = 48
-dimCurve    = 6       (0-10 = negative curve / 11-20 = positive curve)
-prescaler   = 8
-*/
 }
 
 // ==========================================

@@ -17,14 +17,6 @@ ESP8266HTTPUpdateServer UpdateServer;
 #include "filehandeling.h"
 #include "webpages.h"
 
-
-
-
-
-
-
-
-
 void setup() {
   delay(1000);
   Serial.begin(115200);
@@ -77,9 +69,6 @@ void setup() {
   }
 }
 
-
-
- 
 
 void loop() {
   portal.handleClient();

@@ -72,11 +72,6 @@ void saveSetting() {
 }
 
 
-
-
-
-
-
 // Here the values are loaded into the webpage
 String settingsOn(AutoConnectAux& aux, PageArgument& args) {
   AutoConnectInput& minDim = aux.getElement<AutoConnectInput>("minDim");

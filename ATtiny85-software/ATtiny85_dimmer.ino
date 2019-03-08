@@ -35,7 +35,7 @@
 #define TX    PB0   		//Serial port TX
 SoftwareSerial Serial(RX, TX);
 
-int RecivedValue;			//After startup, turn off light;
+int RecievedValue;			//After startup, turn off light;
 int TCCR1Value = B00001000;
 
 void setup(){
@@ -62,7 +62,7 @@ void setup(){
 
   // set up Timer1
   TCCR1 = 0;     											// stop timer
-  OCR1A = RecivedValue;										// set initial dim value
+  OCR1A = RecievedValue;										// set initial dim value
   TIMSK = _BV(OCIE1A) | _BV(TOIE1);  	// interrupt on Compare Match A | enable timer overflow interrupt
   sei();  														// enable interrupts
   // set up zero crossing interrupt

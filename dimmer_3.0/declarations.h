@@ -4,15 +4,15 @@
 const byte SWversion = 1;
 
 
-//Config structure
+//Config dimmer structure
 /* Set these to desired credentials in runtime */
 struct DimConfig {
 //Dim config parameters   
   byte version;
-  byte minDimValue;
-  byte maxDimValue;
+  byte minDimValue;           // min value 4
+  byte maxDimValue;           // max value 64
   int  dimCurve;              // range goes -10 til 10
-  byte prescaller;
+  byte prescaller;            // default 8 B00001000
 
 //mqtt config parameters
 String mqtt;

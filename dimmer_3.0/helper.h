@@ -1,5 +1,7 @@
 #include <math.h>
 
+
+// with this one can calc a dim curve, curve = 0, straight line, curve = -10 dimcurve positive, curve=10 dimcurve negative.
 float fscale( float originalMin, float originalMax, float newBegin, float
 newEnd, float inputValue, float curve){
 
@@ -47,15 +49,6 @@ newEnd, float inputValue, float curve){
 
   zeroRefCurVal = inputValue - originalMin;
   normalizedCurVal  =  zeroRefCurVal / OriginalRange;   // normalize to 0 - 1 float
-
-  /*
-  Serial.print(OriginalRange, DEC);
-   Serial.print("   ");
-   Serial.print(NewRange, DEC);
-   Serial.print("   ");
-   Serial.println(zeroRefCurVal, DEC);
-   Serial.println();
-   */
 
   // Check for originalMin > originalMax  - the math for all other cases i.e. negative numbers seems to work out fine
   if (originalMin > originalMax ) {
