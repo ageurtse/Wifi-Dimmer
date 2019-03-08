@@ -3,6 +3,7 @@
 #include <ESP8266HTTPUpdateServer.h>
 #include <PubSubClient.h>
 #include <AutoConnect.h>
+#include <ESP8266HTTPUpdateServer.h>
 #include <FS.h>    
 
 // Adjusting WebServer class with between ESP8266 and ESP32.
@@ -12,6 +13,7 @@ AutoConnectConfig config;
 //PubSubClient mqttClient(wifiClient);
 ESP8266HTTPUpdateServer UpdateServer;
 
+#include "updatedevice.h"
 #include "declarations.h"
 #include "helper.h"
 #include "filehandeling.h"
@@ -55,6 +57,8 @@ void setup() {
   portal.load(settings);
   portal.on("/Settings",settingsOn, AC_EXIT_AHEAD);
   portal.config(config);
+
+  UpdateServer.setup(&webServer);
 
   Serial.print("WiFi ");
   if (portal.begin()) {
