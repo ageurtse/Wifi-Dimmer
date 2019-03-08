@@ -6,7 +6,7 @@ void handleRoot() {
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
     "</head>"
     "<body>"
-    "<centrer>WIFI Dimmer 2.0</center></p>"
+    "<center><H1>WiFi Dimmer 2.0</br>AG 2019</H1></center></p>"
     "<p style=\"padding-top:10px;text-align:center\">" AUTOCONNECT_LINK(COG_24) "</p>"
     "</body>"
     "</html>";
