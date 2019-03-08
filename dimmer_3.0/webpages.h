@@ -6,7 +6,12 @@ void handleRoot() {
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
     "</head>"
     "<body>"
-    "<center><H1>WiFi Dimmer 2.0</br>AG 2019</H1></center></p>"
+    "<center><H1>WiFi Dimmer 2.0"
+    "</br>AG 2019</br>"
+    "</br>"
+    "</H1>Check github for project and schematic</p>"
+    "<a href=\"https://github.com/ageurtse/Wifi-Dimmer\">https://github.com/ageurtse/Wifi-Dimmer</a><br>"
+    "</center></p></br>"
     "<p style=\"padding-top:10px;text-align:center\">" AUTOCONNECT_LINK(COG_24) "</p>"
     "</body>"
     "</html>";
@@ -149,7 +154,6 @@ String settingsOn(AutoConnectAux& aux, PageArgument& args) {
 
   AutoConnectInput& dimCurve = aux.getElement<AutoConnectInput>("dimCurve");
   dimCurve.value = dimconfig.dimCurve;
-
 
   AutoConnectInput& dimPrescale = aux.getElement<AutoConnectInput>("dimPrescale");
   dimPrescale.value = dimconfig.dimPrescale;

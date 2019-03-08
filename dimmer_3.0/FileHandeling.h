@@ -22,7 +22,7 @@ bool saveConfiguration(const char *filename, const DimConfig &saveconfig) {
   JsonObject &root = jsonBuffer.createObject();
 
   // Set the values
-  root["version"]       = SWversion;
+  root["dimversion"]    = SWversion;
   root["minDimValue"]   = saveconfig.minDimValue;  
   root["maxDimValue"]   = saveconfig.maxDimValue;  
   root["dimCurve"]      = saveconfig.dimCurve;  
@@ -77,7 +77,7 @@ bool loadConfiguration(const char *filename, DimConfig &loadconfig) {
 
 // Copy values from the JsonObject to the Config
 
-  loadconfig.version = root["version"];
+  loadconfig.dimversion   = root["dimversion"];
   Serial.println(F("Valid config file."));
   
   loadconfig.minDimValue  = root["minDimValue"] | 15;  
