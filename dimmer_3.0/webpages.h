@@ -10,7 +10,7 @@ void handleRoot() {
     "</br>AG 2019</br>"
     "</br>"
     "</H1>Check github for project and schematic</p>"
-    "<a href=\"https://github.com/ageurtse/Wifi-Dimmer\">https://github.com/ageurtse/Wifi-Dimmer</a><br>"
+    "<a href=\"https://github.com/ageurtse/Wifi-Dimmer\" target=\"_blank\">https://github.com/ageurtse/Wifi-Dimmer</a><br>"
     "</center></p></br>"
     "<p style=\"padding-top:10px;text-align:center\">" AUTOCONNECT_LINK(COG_24) "</p>"
     "</body>"
