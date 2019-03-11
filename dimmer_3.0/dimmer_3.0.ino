@@ -5,19 +5,29 @@
 #include <AutoConnect.h>
 #include <ESP8266HTTPUpdateServer.h>
 #include <FS.h>    
+#include <SoftwareSerial.h>
 
-// Adjusting WebServer class with between ESP8266 and ESP32.
+#define RX                    14
+#define TX                    12
+SoftwareSerial DimSerial(RX,TX,false,256); // RX, TX
+
+// ESP8266 webserver
 ESP8266WebServer  webServer;
+//Autoconnect wifi manager
 AutoConnect  portal(webServer);
+AutoConnectAux update("/update", "Update");
 AutoConnectConfig config;
-//PubSubClient mqttClient(wifiClient);
+// MQTT Stuf
+WiFiClient   wifiClient;
+PubSubClient mqttClient(wifiClient);
+// updating
 ESP8266HTTPUpdateServer UpdateServer;
 
-#include "updatedevice.h"
 #include "declarations.h"
-#include "helper.h"
+#include "Dimmath.h"
 #include "filehandeling.h"
 #include "webpages.h"
+#include "mqtt.h"
 
 void setup() {
   delay(1000);
@@ -56,6 +66,7 @@ void setup() {
   
   portal.load(settings);
   portal.on("/Settings",settingsOn, AC_EXIT_AHEAD);
+  portal.join ({update});
   portal.config(config);
 
   UpdateServer.setup(&webServer);
@@ -71,10 +82,21 @@ void setup() {
       yield();
     }
   }
+
+  if (dimconfig.mqttServer != "") {
+    mqttClient.setServer(dimconfig.mqttServer.c_str(), 1883);
+    mqttClient.setCallback(callback);  
+  }
 }
 
 
 void loop() {
   portal.handleClient();
 
+  if (dimconfig.mqttServer != "") {
+    if (!mqttClient.connected()) {
+      reconnect();
+    }
+    mqttClient.loop();
+  }
 }
