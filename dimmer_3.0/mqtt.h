@@ -8,12 +8,14 @@ void callback(char* topic, byte* payload, unsigned int length) {
   //Convert payload to a int. value so it could be sent to the attiny by serial.
   payload[length] = '\0';
   String s = String((char*)payload);
+  Serial.println("Topic");
   DimValue = String((char*)payload).toInt();
   int OldDimValue = DimValue;
 
   //below when a dim topic recived
   if (String(topic) == dimconfig.devicename+"/dim/set") {
-      if (DimValue == 0){
+  Serial.println("Dim set");
+        if (DimValue == 0){
         digitalWrite(led_pin, HIGH);
         digitalWrite(relay_pin, LOW);
         mqttClient.publish((dimconfig.devicename+"/switch/status").c_str(), "0");
@@ -31,6 +33,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.println((dimconfig.devicename+"/switch/set"));
   // Below when a switch topic arrived
   if (String(topic) == dimconfig.devicename+"/switch/set") {
+  Serial.println("Switch set");
     if (DimValue == 0){
       digitalWrite(led_pin, HIGH);
       digitalWrite(relay_pin, LOW);
@@ -59,8 +62,8 @@ void reconnect() {
       Serial.print("failed, rc=");
       Serial.print(mqttClient.state());
       Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
-      for(int i = 0; i<5000; i++){
+      // Wait 1 seconds before retrying
+      for(int i = 0; i<1000; i++){
 
       }
     }

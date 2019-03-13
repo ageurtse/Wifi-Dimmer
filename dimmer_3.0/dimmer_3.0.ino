@@ -34,6 +34,9 @@ void setup() {
   Serial.begin(115200);
   Serial.println();
 
+  pinMode(led_pin, OUTPUT);
+  pinMode(relay_pin, OUTPUT);
+
   //allows serving of files from SPIFFS
   Serial.println("Mounting FS...");
   if (!SPIFFS.begin()) {
@@ -47,7 +50,7 @@ void setup() {
   Serial.println(F("Print config file after reading..."));
   printFile(fileName);
 
-  config.apid = String("ESP") + "-" + String(GET_CHIPID(), HEX);
+  config.apid = String("ESP") + String(GET_CHIPID(), HEX);
 
   if (dimconfig.devicename != "") {
     config.apid = dimconfig.devicename;
@@ -87,6 +90,12 @@ void setup() {
     mqttClient.setServer(dimconfig.mqttServer.c_str(), 1883);
     mqttClient.setCallback(callback);  
   }
+
+  digitalWrite(led_pin, HIGH);
+  digitalWrite(relay_pin, LOW);
+  delay(1000);
+  digitalWrite(led_pin, LOW);
+  digitalWrite(relay_pin, HIGH);
 }
 
 
