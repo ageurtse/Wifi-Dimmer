@@ -15,7 +15,7 @@ There are 2 parts of the software, one for the ATTiny and one for the ESP8266
 Both are posted here. 
 # Word of Caution
 Please be very carefull you are working with live voltage 230V, this voltage can realy harm you. 
-By building the dimmer, i'm not responsible for any faults or what ever. 
+By building the dimmer, i'm not responsible for any faults or what ever. I stoped development off this dimmer, on one night the triax was overheated. luckely i was at home to prevented real major damage. 
 
 # ATtiny85 Software
 The ATtiny85 software is for the soul purpose of dimming the light, there is a zerocross detction which is on interupt 0, the gate is on pin PB3. 
