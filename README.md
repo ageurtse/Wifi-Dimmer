@@ -1,6 +1,6 @@
 # Wifi Dimmer
 
-Please do not rebuild this device, in my case there was a serious issue with overheating !!!!!
+!!!!! Please do not rebuild this device, in my case there was a serious issue with overheating !!!!!
 
 
 This is all about my home build WiFi Dimmer
