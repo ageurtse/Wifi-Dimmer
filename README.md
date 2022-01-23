@@ -1,4 +1,8 @@
 # Wifi Dimmer
+
+Please do not rebuild this device, in my case there was a serious issue with overheating !!!!!
+
+
 This is all about my home build WiFi Dimmer
 Becaus of it's my first github project, the master is still in Beta. 
 For me the project works, but there are a lot off things to change, so keep watching for any change.
